@@ -1,0 +1,23 @@
+# action.yml
+name: 'Hugo rsync deployment'
+description: 'An action that generates and deploys a static website using Hugo and rsync.'
+branding:
+  icon: 'upload-cloud'
+  color: 'blue'
+
+inputs:
+  hugo-arguments:
+    description: 'Hugo arguments'
+    required: false
+    default: '--minify'
+  rsync-arguments:
+    description: 'Rsync arguments'
+    required: false
+    default: '--archive --compress --xattrs --delete'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.hugo-arguments }}
+    - ${{ inputs.rsync-arguments }}
